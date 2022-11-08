@@ -2,10 +2,15 @@ from dash import Dash, html, dcc, Input, Output
 import plotly.express as px
 import pandas as pd
 import psycopg2
+import os
 
 app = Dash(__name__)
 
-import os
+server = app.server
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DB_HOST = os.environ.get("DB_HOST")
 DB_NAME = os.environ.get("DB_NAME")
