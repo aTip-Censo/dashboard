@@ -27,7 +27,7 @@ df2 = pd.read_sql_query("select * from {}".format(TB_NAME2), con=conn)
 
 # criando o gráfico
 fig = px.bar(df, x="companyName", y="qtd_answers", color="companyName", barmode="group")
-opcoes = list(df2['companyName'].unique())
+opcoes = list(df['companyName'].unique())
 opcoes.append("Todas as Empresas")
 
 app.layout = html.Div(children=[
