@@ -70,7 +70,7 @@ def update_output(value):
             'appointments': 'Quantidade',
             'answer': 'Resposta'
         },
-        height=800 
+        height=550
 )
     return fig
 
