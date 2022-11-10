@@ -26,7 +26,11 @@ df = pd.read_sql_query("select * from {}".format(TB_NAME), con=conn)
 df2 = pd.read_sql_query("select * from {}".format(TB_NAME2), con=conn)
 
 # criando o gráfico
-fig = px.bar(df, x="companyName", y="qtd_answers", color="companyName", barmode="group")
+fig = px.bar(df, x="companyName", y="qtd_answers", color="companyName", barmode="group",
+       labels={
+            'companyName': 'Empresa',
+            'qtd_answers': 'Quantidade de Respostas'
+        })
 opcoes = list(df2['companyName'].unique())
 opcoes.append("Todas as Empresas")
 
@@ -53,10 +57,21 @@ app.layout = html.Div(children=[
 )
 def update_output(value):
     if value == "Todas as Empresas":
-        fig = px.bar(df, x="companyName", y="qtd_answers", color="companyName", barmode="group")
+        fig = px.bar(df, x="companyName", y="qtd_answers", color="companyName", barmode="group",         
+        labels={
+            'companyName': 'Empresa',
+            'qtd_answers': 'Quantidade de Respostas'
+        })
     else:
         tabela_filtrada = df2.loc[df2['companyName']==value, :]
-        fig = px.bar(tabela_filtrada, x="questionName", y="appointments", color="answer", barmode="group")
+        fig = px.bar(tabela_filtrada, x="answer", y="appointments", color="questionName", barmode="group",
+        labels={
+            'questionName': 'Pergunta',
+            'appointments': 'Quantidade',
+            'answer': 'Resposta'
+        },
+        height=800 
+)
     return fig
 
 if __name__ == '__main__':
